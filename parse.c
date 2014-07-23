@@ -12,7 +12,9 @@
 
   /* parse a single command */
 void parse_command(char * command, struct commandType *comm) {
-	printf("parse_command: parsing a single command\n");
+  comm->command = command;
+  comm->VarNum = 0;
+  //printf("parse_command: parsing a single command\n");
 }
 
 /*   parse commandline for space separated commands */
@@ -20,13 +22,16 @@ parseInfo * parse(char *cmdline){
   parseInfo *prse;
   commandType *cmd_type;
   char *next_toke;
+  prse  = malloc(sizeof(parseInfo));
 
   next_toke = strtok(cmdline, " ");
 
-  while(next_toke != NULL){
+  int i = 0;
+  while(next_toke != NULL){    
     next_toke = strtok(NULL, " ");
-    parse_command(next_toke,);
+    parse_command(next_toke,  prse->CommArray[i]);
     printf("parse token: %c\n", cmdline[i]);
+    i++;
   } 
   return prse;
 }

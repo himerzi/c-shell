@@ -2,7 +2,7 @@
  *  shell.c
  */
 
-#include <stdio.h>
+#Include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
 #include <readline/readline.h>
@@ -11,13 +11,15 @@
 
 
 int main(int argc, char **argv) {
+  parseInfo *info;  
   while(1) {
     
+
     char *in_line;
     in_line = readline("--comando-->");
     
     // info  =
-  parse(in_line);
+  info = parse(in_line);
     
     print_info(in_line);
   }
