@@ -2,7 +2,7 @@
 #include <string.h>
 
 int main(){
-    char *s = "h e l";
-    char *tok = strtok(s, " ");
+	printf("%u\n", sizeof(void *));
+	printf("%u\n", sizeof(char *));
     return 0;
 }
