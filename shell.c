@@ -20,8 +20,7 @@ int main(int argc, char **argv) {
     
 
     info = parse(in_line);
-
-// print_info(in_line);
+    //now lets do something with info....
 
   }
 
