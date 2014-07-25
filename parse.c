@@ -8,24 +8,20 @@
 #include "parse.h"
 #include <ctype.h>
 
-  /* void init_info(parseInfo *p) { */
-  /*     initialize parseInfo struct */
-  /* } */
-
   /* parse a single command */
-void parse_command(char * command, struct commandType *comm) {
-  char *cmd_token;
+/* void parse_command(char * command, struct commandType *comm) { */
+/*   char *cmd_token; */
   
-  cmd_token = strtok(command, " ");
-  if (cmd_token != NULL) comm->command = cmd_token;
+/*   cmd_token = strtok(command, " "); */
+/*   if (cmd_token != NULL) comm->command = cmd_token; */
   
-  int i = 0;
-  while(cmd_token != NULL){
-    cmd_token = strtok(NULL, " ");
-    comm->VarList[i] = cmd_token;
-    i++;
-  }
-}
+/*   int i = 0; */
+/*   while(cmd_token != NULL){ */
+/*     cmd_token = strtok(NULL, " "); */
+/*     comm->VarList[i] = cmd_token; */
+/*     i++; */
+/*   } */
+/* } */
 
 char** split(char *cmdline, char * delim) {
 
