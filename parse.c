@@ -27,48 +27,54 @@ void parse_command(char * command, struct commandType *comm) {
   }
 }
 
-/* char*** split(char *cmdline, char * delim) { */
- 
+char** split(char *cmdline, char * delim) {
 
-/*   char * token_generator = strtok(cmdline, delim); */
-/*   int i = 0; */
-/*   while(token_generator != NULL) { */
-/*     tokens[i] = token_generator; */
-/*     token_generator = strtok(NULL, delim); */
-/*     i++; */
-/*   } */
+  //  printf("%lu\n", ((size_t) MAX_TOKENS) * sizeof(char*));
+  //  printf("MAX_TOKENS * sizeof(char*): %lu\n", MAX_TOKENS * sizeof(char*));
 
-/*   return &tokens; */
-/* } */
-
-/*   parse commandline for space separated commands */
-parseInfo * parse(char *cmdline){
-  parseInfo *prse;
-  struct commandType *cmd_type;
-  char *next_toke;
-  // prse  = malloc(sizeof(parseInfo));
-  // char **tokens = *split(cmdline, " ");
-  
   char **tokens = (char **) malloc(MAX_TOKENS * sizeof(char*));
   int i;
   for (i = 0; i < MAX_TOKENS; i++) {
     tokens[i] = (char *) malloc(MAX_STRING_LEN * sizeof(char));
-    printf("malloc: %u %p\n", i, tokens[i]);
+    //printf("malloc: %u %p\n", i, tokens[i]);
     if (tokens[i] == NULL) {
       printf("HERP\n");
     }
   }
 
-  for (i = 0; i < MAX_TOKENS; i++) {
-    // printf("%p\n", tokens[i]);
-    printf("alloc: %d\n", i);
+  char * token_generator = strtok(cmdline, delim);
+  int j = 0;
+  printf("cmdline: %s, token_gen1: %s\n", cmdline, token_generator);
+  while(token_generator != NULL) {
+    tokens[j] = token_generator;
+    token_generator = strtok(NULL, delim);
+    j++;
   }
   
-  for (i = 0; i < MAX_TOKENS; i++) {
-    printf("free: %d\n", i);
-    free(tokens[i]);
+  for (int k = 0; k < MAX_TOKENS; k++) {
+    printf("%s,", tokens[k]);
+  }
+  printf("\n");
+
+  return tokens;
+}
+
+/*   parse commandline for space separated commands */
+parseInfo * parse(char *cmdline){
+  // (void) cmdline;             /* FIXME */
+  parseInfo *prse = NULL;     /* FIXME */
+  // struct commandType *cmd_type;
+  // char *next_toke;
+  // prse  = malloc(sizeof(parseInfo));
+  char **tokens = split(cmdline, " ");
+  
+  
+  printf("%p", tokens);
+  for (int i = 0; i < MAX_TOKENS; i++) {
+    //printf("free: %d\n", i);
+    //free(tokens[i]);
  }
-  free(tokens);
+  //free(tokens);
 
 
   //int i = 0;

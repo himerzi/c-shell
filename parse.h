@@ -2,7 +2,7 @@
 #define PIPE_MAX_NUM 10
 #define FILE_MAX_SIZE 40
 #define MAX_STRING_LEN 32
-#define MAX_TOKENS MAX_VAR_NUM * PIPE_MAX_NUM + (PIPE_MAX_NUM - 1)
+#define MAX_TOKENS (MAX_VAR_NUM * PIPE_MAX_NUM + (PIPE_MAX_NUM - 1))
 struct commandType {
   char *command;
   char *VarList[MAX_VAR_NUM];

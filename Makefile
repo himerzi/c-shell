@@ -1,4 +1,4 @@
-CFLAGS=-DUNIX -lreadline -lcurses 
+CFLAGS=-lreadline -Wall -Wextra -Werror
 DEBUG=-g
 #DEBUG=
 
