@@ -8,25 +8,7 @@
 #include "parse.h"
 #include <ctype.h>
 
-  /* parse a single command */
-/* void parse_command(char * command, struct commandType *comm) { */
-/*   char *cmd_token; */
-  
-/*   cmd_token = strtok(command, " "); */
-/*   if (cmd_token != NULL) comm->command = cmd_token; */
-  
-/*   int i = 0; */
-/*   while(cmd_token != NULL){ */
-/*     cmd_token = strtok(NULL, " "); */
-/*     comm->VarList[i] = cmd_token; */
-/*     i++; */
-/*   } */
-/* } */
-
 char** split(char *cmdline, char * delim) {
-
-  //  printf("%lu\n", ((size_t) MAX_TOKENS) * sizeof(char*));
-  //  printf("MAX_TOKENS * sizeof(char*): %lu\n", MAX_TOKENS * sizeof(char*));
 
   char **tokens = (char **) malloc(MAX_TOKENS * sizeof(char*));
   int i;
@@ -40,35 +22,64 @@ char** split(char *cmdline, char * delim) {
 
   char * token_generator = strtok(cmdline, delim);
   int j = 0;
-  printf("cmdline: %s, token_gen1: %s\n", cmdline, token_generator);
+  //printf("cmdline: %s, token_gen1: %s\n", cmdline, token_generator);
   while(token_generator != NULL) {
     tokens[j] = token_generator;
     token_generator = strtok(NULL, delim);
     j++;
   }
-  
-  for (int k = 0; k < MAX_TOKENS; k++) {
-    printf("%s,", tokens[k]);
-  }
-  printf("\n");
-
+  tokens[j] = NULL;//setting end element to NULL
   return tokens;
 }
 
+/* performs the actul parsing of input */
+void parse_commands(char ** commands, parseInfo * prse) {
+  
+  int i = 0;
+  int command_number = 0;
+  while(commands[i] != NULL){
+    (prse->CommArray[command_number]).command = commands[i];
+    //printf("stored some comms\n");
+    int vars_i = 0;
+    int var_cursor = i+1; // points to location on commands of variable
+                          // thaat its attempting to parse;
+    while(commands[var_cursor] != NULL && strcmp(commands[var_cursor], "|") != 0){
+      //printf("stored some vars \n");
+      (prse->CommArray[command_number]).VarList[vars_i] = commands[var_cursor];
+      vars_i++;
+     
+      var_cursor++;
+    }
+    command_number++;
+    i = var_cursor + 1;
+  }
+}
+
+
 /*   parse commandline for space separated commands */
 parseInfo * parse(char *cmdline){
-  //parseInfo *prse;// = malloc(sizeof(parseInfo));
+  parseInfo *prse = malloc(sizeof(parseInfo));
   // struct commandType *cmd_type;
   // char *next_toke;
-  // prse  = malloc(sizeof(parseInfo));
   char **tokens = split(cmdline, " ");
   
+
+  parse_commands(tokens, prse);
   
+  int k = 0;
+  while(k<5){
+    printf("comm: %s, ", prse->CommArray[k].command);
+    for(int j = 0; j < MAX_VAR_NUM; j++){
+      printf("var: %s, ", prse->CommArray[k].VarList[j]);
+      
+    }
+    printf("\n");
+    k++;
+  }
 // free tokens once we are done with them
   for (int i = 0; i < MAX_TOKENS; i++) {
     // not all strings may have been malloc'd so check if null first
       if (tokens[i] == NULL) {
-
       continue;
       }
   }
@@ -77,6 +88,13 @@ parseInfo * parse(char *cmdline){
   free(tokens);
 
   return NULL;
+}
+
+void print_tokens(char **tokens){
+  for (int k = 0; k < MAX_TOKENS; k++) {
+    printf("%s,", tokens[k]);
+  }
+  printf("\n");
 }
 
   /* /\* prints out parse struct *\/ */
