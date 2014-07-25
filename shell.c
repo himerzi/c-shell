@@ -11,17 +11,17 @@
 
 
 int main(int argc, char **argv) {
-  parseInfo *info;  
+  // parseInfo *info;  
   while(1) {
    
     char *in_line;
-    in_line = readline("--comando-->");
+    in_line = readline("-->");
     
-    // info  =
-  info = parse(in_line);
+    //info = 
+    parse(in_line);
     
-// print_info(in_line);
+    // print_info(in_line);
   }
 
-  //free_info(info);
+  //  free_info(info);
  }
