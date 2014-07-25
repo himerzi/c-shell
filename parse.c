@@ -39,12 +39,12 @@ void parse_commands(char ** commands, parseInfo * prse) {
   int command_number = 0;
   while(commands[i] != NULL){
     (prse->CommArray[command_number]).command = commands[i];
-    //printf("stored some comms\n");
+   
     int vars_i = 0;
     int var_cursor = i+1; // points to location on commands of variable
                           // thaat its attempting to parse;
     while(commands[var_cursor] != NULL && strcmp(commands[var_cursor], "|") != 0){
-      //printf("stored some vars \n");
+   
       (prse->CommArray[command_number]).VarList[vars_i] = commands[var_cursor];
       vars_i++;
      
@@ -59,37 +59,35 @@ void parse_commands(char ** commands, parseInfo * prse) {
 /*   parse commandline for space separated commands */
 parseInfo * parse(char *cmdline){
   parseInfo *prse = malloc(sizeof(parseInfo));
-  // struct commandType *cmd_type;
-  // char *next_toke;
-  char **tokens = split(cmdline, " ");
-  
-
+  char **tokens = split(cmdline, " ");  
   parse_commands(tokens, prse);
   
-  int k = 0;
-  while(k<5){
-    printf("comm: %s, ", prse->CommArray[k].command);
-    for(int j = 0; j < MAX_VAR_NUM; j++){
-      printf("var: %s, ", prse->CommArray[k].VarList[j]);
-      
-    }
-    printf("\n");
-    k++;
-  }
-// free tokens once we are done with them
+  print_pinfo(prse);
+  // free tokens once we are done with them
   for (int i = 0; i < MAX_TOKENS; i++) {
     // not all strings may have been malloc'd so check if null first
-      if (tokens[i] == NULL) {
+    if (tokens[i] == NULL) {
       continue;
-      }
+    }
   }
 
   printf("free tokens\n");
   free(tokens);
 
-  return NULL;
+  return prse;
 }
 
+void print_pinfo(parseInfo *prse){
+  int k = 0;
+  while(k<5){
+    printf("comm: %s, ", prse->CommArray[k].command);
+    for(int j = 0; j < MAX_VAR_NUM; j++){
+      printf("var: %s, ", prse->CommArray[k].VarList[j]);      
+    }
+    printf("\n");
+    k++;
+  }
+}
 void print_tokens(char **tokens){
   for (int k = 0; k < MAX_TOKENS; k++) {
     printf("%s,", tokens[k]);
@@ -97,19 +95,6 @@ void print_tokens(char **tokens){
   printf("\n");
 }
 
-  /* /\* prints out parse struct *\/ */
-  /* void print_info (parseInfo *info) { */
-  /*    foreach type in parseInfo { */
-  /*      print "type_name: type" */
-  /*    } */
-  /* } */
-
-
-  /* void print_info (char *in_line) { */
-     
-  /*   printf("%s\n", in_line); */
-    
-  /* } */
 
   /* /\*  free memory used in parseInfo *\/ */
   /* void free_info (parseInfo *info) { */

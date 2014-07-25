@@ -25,6 +25,7 @@ typedef struct {
 //void free_info(parseInfo *);
 //void print_info(parseInfo *);
 void print_info(char *s);
+void print_pinfo(parseInfo *prse);
 parseInfo *parse(char *);
 void parse_commands(char ** commands, parseInfo * prse);
 
