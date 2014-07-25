@@ -57,35 +57,26 @@ char** split(char *cmdline, char * delim) {
 
 /*   parse commandline for space separated commands */
 parseInfo * parse(char *cmdline){
-  // (void) cmdline;             /* FIXME */
-  parseInfo *prse = NULL;     /* FIXME */
+  //parseInfo *prse;// = malloc(sizeof(parseInfo));
   // struct commandType *cmd_type;
   // char *next_toke;
   // prse  = malloc(sizeof(parseInfo));
   char **tokens = split(cmdline, " ");
   
   
-  printf("%p", tokens);
+// free tokens once we are done with them
   for (int i = 0; i < MAX_TOKENS; i++) {
-    //printf("free: %d\n", i);
-    //free(tokens[i]);
- }
-  //free(tokens);
+    // not all strings may have been malloc'd so check if null first
+      if (tokens[i] == NULL) {
 
+      continue;
+      }
+  }
 
-  //int i = 0;
-  //while(1){    
-    
-    //      parse_command(next_toke, &(prse->CommArray[i]));
-    //i++;
-                    
-  // }
+  printf("free tokens\n");
+  free(tokens);
 
-    //printf("next toke is: %s\n", next_toke);
-    //parse_command(next_toke,  &(prse->CommArray[i]));
-    //printf("parsed command into parse info : %s, With vars: %s\n", (prse->CommArray[i]).command,);
-  //} 
-  return prse;
+  return NULL;
 }
 
   /* /\* prints out parse struct *\/ */
@@ -96,11 +87,11 @@ parseInfo * parse(char *cmdline){
   /* } */
 
 
-  void print_info (char *in_line) {
+  /* void print_info (char *in_line) { */
      
-    printf("%s\n", in_line);
+  /*   printf("%s\n", in_line); */
     
-  }
+  /* } */
 
   /* /\*  free memory used in parseInfo *\/ */
   /* void free_info (parseInfo *info) { */
