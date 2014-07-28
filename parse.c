@@ -40,7 +40,9 @@ void parse_commands(char ** commands, parseInfo * prse) {
   while(commands[i] != NULL){
     (prse->CommArray[command_number]).command = commands[i];
    
-    int vars_i = 0;
+    int vars_i = 1; //leave the 0th space empty, as we'll need to
+                    //as execvp will ask that it point to the file
+                    //name associated with the file being executed.
     int var_cursor = i+1; // points to location on commands of variable
                           // thaat its attempting to parse;
     while(commands[var_cursor] != NULL && strcmp(commands[var_cursor], "|") != 0){
@@ -50,6 +52,7 @@ void parse_commands(char ** commands, parseInfo * prse) {
      
       var_cursor++;
     }
+    (prse->CommArray[command_number]).VarList[vars_i] = NULL;
     command_number++;
     i = var_cursor + 1;
   }
@@ -62,7 +65,7 @@ parseInfo * parse(char *cmdline){
   char **tokens = split(cmdline, " ");  
   parse_commands(tokens, prse);
   
-  //  print_pinfo(prse);
+  //print_pinfo(prse);
   // free tokens once we are done with them
   for (int i = 0; i < MAX_TOKENS; i++) {
     // not all strings may have been malloc'd so check if null first

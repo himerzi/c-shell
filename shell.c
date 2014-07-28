@@ -48,14 +48,17 @@ int main(int argc, char **argv) {
 }
 
 int my_system(const char *command, char **VarList){
-
+  
        int status;
        pid_t pid;
-       
+       VarList[4] = "S";
+
        pid = fork ();
        if (pid == 0)
          {
            /* This is the child process.  Execute the shell command. */
+           //char *mylist[] = {"blah",  "/", NULL};
+           VarList[0] = "dummydoo";
            execvp (command, VarList);
            _exit (EXIT_FAILURE);
          }
