@@ -62,7 +62,7 @@ parseInfo * parse(char *cmdline){
   char **tokens = split(cmdline, " ");  
   parse_commands(tokens, prse);
   
-  print_pinfo(prse);
+  //  print_pinfo(prse);
   // free tokens once we are done with them
   for (int i = 0; i < MAX_TOKENS; i++) {
     // not all strings may have been malloc'd so check if null first
@@ -71,7 +71,7 @@ parseInfo * parse(char *cmdline){
     }
   }
 
-  printf("free tokens\n");
+  //printf("free tokens\n");
   free(tokens);
 
   return prse;

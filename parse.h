@@ -28,4 +28,5 @@ void print_info(char *s);
 void print_pinfo(parseInfo *prse);
 parseInfo *parse(char *);
 void parse_commands(char ** commands, parseInfo * prse);
+int my_system(const char *command, char **VarList);
 
